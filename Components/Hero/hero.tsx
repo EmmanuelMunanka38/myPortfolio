@@ -59,7 +59,7 @@ const Hero = () => {
     </div>
 
     <div className="order-1 md:order-2 flex justify-center">
-      <Image
+      <img
         className="rounded-full object-cover shadow-2xl border-4 border-emerald-500 w-80 h-80 lg:w-96 lg:h-96 transform hover:scale-105 transition duration-500"
         src="https://avatars.githubusercontent.com/u/191920224?v=4"
         alt="Emmanuel Munanka Professional Headshot"

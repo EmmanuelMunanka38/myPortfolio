@@ -25,7 +25,7 @@ const Navbar = () => {
                 
 
                 <Link href="/" className='flex items-center space-x-3 transition-opacity duration-300 hover:opacity-80'>
-                    <Image 
+                    <img
                         className='rounded-full border-2 border-green-500 object-cover'  
                         src="https://avatars.githubusercontent.com/u/191920224?v=4" 
                         alt="My Github Avatar" 
