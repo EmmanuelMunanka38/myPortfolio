@@ -55,14 +55,7 @@ const Navbar = () => {
                     </button>
                     
 
-                    <Link href="/">
-                        <button 
 
-                            className='font-bold text-gray-800 py-2 px-4 rounded-lg hover:text-emerald-600 transition duration-300'
-                        >
-                            Home
-                        </button>
-                    </Link>
                 </div>
                 
             </nav>
