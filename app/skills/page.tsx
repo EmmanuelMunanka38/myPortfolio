@@ -11,7 +11,7 @@ interface SkillItemProps {
   description: string;
 }
 
-const SkillItem: React.FC<SkillItemProps> = ({ icon, name, description }) => (
+ export const SkillItem: React.FC<SkillItemProps> = ({ icon, name, description }) => (
     <div className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm hover:shadow-lg transition duration-300 border border-gray-100">
         <span className="text-2xl text-emerald-600 flex-shrink-0">{icon}</span>
         <div>
@@ -39,29 +39,6 @@ const SkillsPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 items-start">
                     
-
-                    <div className="md:col-span-1 space-y-8 sticky top-20 p-6 bg-white rounded-xl shadow-xl border-t-4 border-emerald-600">
-                        <h2 className="text-2xl font-bold text-gray-800">The Architect&apos;s Toolkit</h2>
-                        
-                        <p className="text-gray-700">
-                            As a CEO and Full-Stack Architect, my focus is on **strategic technology adoption**. I don&apos;t just use tools; I master the right tools for scalable, maintainable, and high-performance applications.
-                        </p>
-                        
-                        <ul className="space-y-3 text-gray-700">
-                            <li className="flex items-center space-x-2"><span className="text-emerald-600 font-bold">✓</span> Expertise in the MERN Stack.</li>
-                            <li className="flex items-center space-x-2"><span className="text-emerald-600 font-bold">✓</span> Strict adherence to TypeScript for type safety.</li>
-                            <li className="flex items-center space-x-2"><span className="text-emerald-600 font-bold">✓</span> Cloud-native deployment via Docker and Vercel.</li>
-                            <li className="flex items-center space-x-2"><span className="text-emerald-600 font-bold">✓</span> Focus on Lighthouse performance optimization.</li>
-                        </ul>
-                        
-                        <Link href="/projects">
-                            <button className="w-full bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg hover:bg-emerald-700 transition duration-300">
-                                See Skills in Action (Projects)
-                            </button>
-                        </Link>
-                    </div>
-
-
                     <div className="md:col-span-2 space-y-10">
                         
 
