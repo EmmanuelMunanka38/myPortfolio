@@ -5,7 +5,13 @@ import Link from 'next/link';
 // SkillItem component is either defined here or imported from a helper file.
 
 // Reusable component for displaying an individual skill item
-const SkillItem = ({ icon, name, description }) => (
+interface SkillItemProps {
+  icon: React.ReactNode;
+  name: string;
+  description: string;
+}
+
+const SkillItem: React.FC<SkillItemProps> = ({ icon, name, description }) => (
     <div className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm hover:shadow-lg transition duration-300 border border-gray-100">
         <span className="text-2xl text-emerald-600 flex-shrink-0">{icon}</span>
         <div>
@@ -24,7 +30,7 @@ const SkillsPage = () => {
 
                 <header className="text-center mb-16">
                     <h1 className="text-5xl font-extrabold text-gray-900 mb-2">My Technical Arsenal</h1>
-                    <p className="text-xl text-gray-600">The core technologies and strategic mastery that drive Cosmic's development.</p>
+                    <p className="text-xl text-gray-600">The core technologies and strategic mastery that drive Cosmic&apos;s development.</p>
                     <Link href="/" className="text-lg text-emerald-600 hover:underline mt-4 inline-block font-medium">
                         ← Back to Home Page
                     </Link>
@@ -35,10 +41,10 @@ const SkillsPage = () => {
                     
 
                     <div className="md:col-span-1 space-y-8 sticky top-20 p-6 bg-white rounded-xl shadow-xl border-t-4 border-emerald-600">
-                        <h2 className="text-2xl font-bold text-gray-800">The Architect's Toolkit</h2>
+                        <h2 className="text-2xl font-bold text-gray-800">The Architect&apos;s Toolkit</h2>
                         
                         <p className="text-gray-700">
-                            As a CEO and Full-Stack Architect, my focus is on **strategic technology adoption**. I don't just use tools; I master the right tools for scalable, maintainable, and high-performance applications.
+                            As a CEO and Full-Stack Architect, my focus is on **strategic technology adoption**. I don&apos;t just use tools; I master the right tools for scalable, maintainable, and high-performance applications.
                         </p>
                         
                         <ul className="space-y-3 text-gray-700">

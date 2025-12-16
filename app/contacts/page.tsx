@@ -55,7 +55,14 @@ const ContactForm = () => {
 }
 
 
-const ContactLink = ({ icon, label, value, href }) => (
+interface ContactLinkProps {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href: string;
+}
+
+const ContactLink: React.FC<ContactLinkProps> = ({ icon, label, value, href }) => (
     <a 
         href={href} 
         target="_blank" 
@@ -77,8 +84,8 @@ export default function ContactsPage() {
             <div className="container mx-auto px-6 lg:px-12">
 
                 <header className="text-center mb-16">
-                    <h1 className="text-5xl font-extrabold text-gray-900 mb-2">Let's Build Something Great</h1>
-                    <p className="text-xl text-gray-600">I'm ready to discuss new opportunities, challenging projects, or a role on your team.</p>
+                    <h1 className="text-5xl font-extrabold text-gray-900 mb-2">Let&apos;s Build Something Great</h1>
+                    <p className="text-xl text-gray-600">I&apos;m ready to discuss new opportunities, challenging projects, or a role on your team.</p>
                     <Link href="/" className="text-lg text-emerald-600 hover:underline mt-4 inline-block font-medium">
                         ← Back to Home Page
                     </Link>
