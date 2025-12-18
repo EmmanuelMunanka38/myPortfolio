@@ -51,9 +51,9 @@ const Hero = () => {
         <button className="bg-emerald-600 text-white font-bold py-4 px-8 rounded-lg shadow-xl hover:bg-emerald-700 transition duration-300 transform hover:scale-105">
           View Featured Projects
         </button>
-        <button className="border border-gray-300 text-gray-800 font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition duration-300">
-          Connect on LinkedIn
-        </button>
+        <a href="https://github.com/EmmanuelMunanka38"><button className="border  border-gray-300 text-gray-800 font-bold py-4 px-8 rounded-lg hover:bg-green-200 transition duration-300">
+          Connect to my GITHUB
+        </button></a>
       </div>
       
     </div>
@@ -74,3 +74,5 @@ const Hero = () => {
 }
 
 export default Hero;
+
+

@@ -1,11 +1,38 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import emailjs from '@emailjs/browser';
 
 
+const ContactForm: React.FC = () => {
+    const form = useRef<HTMLFormElement>(null);
+    const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-const ContactForm = () => {
+    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        
+        if (!form.current) return;
+
+        setStatus('sending');
+
+
+        const SERVICE_ID = 'service_uyhbh46';
+        const TEMPLATE_ID = 'template_hz36u2j';
+        const PUBLIC_KEY = 'Pd6347alfyRYhQSOX';
+
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+            .then(() => {
+                setStatus('success');
+                if (form.current) form.current.reset();
+            }, (error) => {
+                console.error(error.text);
+                setStatus('error');
+            });
+    };
+
     return (
-        <form className="space-y-6">
+        <form ref={form} onSubmit={sendEmail} className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-900">Send Me a Message</h3>
             
             <div>
@@ -40,19 +67,28 @@ const ContactForm = () => {
                     rows={5} 
                     required 
                     className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 transition duration-150"
-                    placeholder="Tell me about your project or opportunity..."
+                    placeholder="Tell me about your project..."
                 />
             </div>
             
             <button 
                 type="submit" 
-                className="w-full bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-emerald-700 transition duration-300 transform hover:scale-[1.01]"
+                disabled={status === 'sending'}
+                className={`w-full text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-[1.01] 
+                    ${status === 'sending' ? 'bg-gray-400 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700'}`}
             >
-                Send Message
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
+
+            {status === 'success' && (
+                <p className="text-emerald-600 font-medium text-center bg-emerald-50 py-2 rounded">Message sent successfully!</p>
+            )}
+            {status === 'error' && (
+                <p className="text-red-600 font-medium text-center bg-red-50 py-2 rounded">Something went wrong. Please try again.</p>
+            )}
         </form>
     );
-}
+};
 
 
 interface ContactLinkProps {
@@ -82,33 +118,22 @@ export default function ContactsPage() {
     return (
         <main className="bg-stone-50 min-h-screen py-20">
             <div className="container mx-auto px-6 lg:px-12">
-
                 <header className="text-center mb-16">
                     <h1 className="text-5xl font-extrabold text-gray-900 mb-2">Let&apos;s Build Something Great</h1>
-                    <p className="text-xl text-gray-600">I&apos;m ready to discuss new opportunities, challenging projects, or a role on your team.</p>
+                    <p className="text-xl text-gray-600">I&apos;m ready to discuss new opportunities or a role on your team.</p>
                     <Link href="/" className="text-lg text-emerald-600 hover:underline mt-4 inline-block font-medium">
                         ← Back to Home Page
                     </Link>
                 </header>
 
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
-                    
-
                     <div className="bg-white p-8 sm:p-10 rounded-xl shadow-2xl border-t-4 border-emerald-600">
                         <ContactForm />
                     </div>
 
-
                     <div className="space-y-8">
-                        
                         <h2 className="text-3xl font-bold text-gray-800">Direct Contact & Socials</h2>
-                        <p className="text-lg text-gray-600">
-                            Feel free to reach out via the form, or connect with me directly on any of these platforms.
-                        </p>
-
                         <div className="space-y-4">
-
                             <ContactLink 
                                 icon="📧" 
                                 label="Email" 
@@ -118,7 +143,7 @@ export default function ContactsPage() {
                             <ContactLink 
                                 icon="🔗" 
                                 label="Instagram" 
-                                value="https://www.instagram.com/em_mafx12/" 
+                                value="@em_mafx12" 
                                 href="https://www.instagram.com/em_mafx12/"
                             />
                             <ContactLink 
@@ -127,15 +152,12 @@ export default function ContactsPage() {
                                 value="EmmanuelMunanka38" 
                                 href="https://github.com/EmmanuelMunanka38"
                             />
-
                         </div>
-
                         <div className="text-center md:text-left pt-4">
                             <h3 className="text-xl font-bold text-gray-800 mb-2">Location</h3>
-                            <p className="text-lg text-gray-600">Currently based in Dar es Salaam, Tanzania (EAT)</p>
+                            <p className="text-lg text-gray-600">Dar es Salaam, Tanzania (EAT)</p>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </main>
