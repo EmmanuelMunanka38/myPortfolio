@@ -19,8 +19,8 @@ const Navbar = () => {
     
 
     
-    return (
-        <header className='w-full sticky top-0 z-50 shadow-md backdrop-blur-sm bg-emerald-100/90 border-b border-emerald-200'>
+    return ( <>
+            <header className='w-full sticky top-0 z-50 shadow-md backdrop-blur-sm bg-emerald-100/90 border-b border-emerald-200'>
             <nav className='flex items-center justify-between px-6 py-3 mx-auto'>
                 
 
@@ -60,6 +60,7 @@ const Navbar = () => {
                 
             </nav>
         </header>
+        </>
     );
 }
 

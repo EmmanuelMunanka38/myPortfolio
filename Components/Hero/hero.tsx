@@ -1,14 +1,21 @@
 import React from 'react';
 import Image from 'next/image';
+import { FaReact } from "react-icons/fa6";
+import { FaNodeJs } from "react-icons/fa";
+import { BiLogoTypescript } from "react-icons/bi";
+import { BiLogoTailwindCss } from "react-icons/bi";
+import { FaDocker } from "react-icons/fa";
+
+
 
 const Hero = () => {
     return (
-        <section className="min-h-screen flex items-center bg-stone-50 py-20">
+        <section className="min-h-screen flex items-center bg-white  py-20">
   
-  <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+  <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 items-center border border-transparent rounder in-hover:q">
 
 
-    <div className="order-2 md:order-1 text-center md:text-left space-y-8">
+    <div className="order-2 md:order-1 text-center md:text-left space-y-8 ">
       
 
       <div className="space-y-2">
@@ -35,14 +42,15 @@ const Hero = () => {
 
 
       <div className="pt-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-4 md:text-left text-center">Core Tech Stack:</h3>
-        <div className="flex flex-wrap justify-center md:justify-start gap-6">
-         <div className="p-3 bg-white rounded-full shadow-md"> React</div>
-          <div className="p-3 bg-white rounded-full shadow-md">⚡ Next.js</div>
-          <div className="p-3 bg-white rounded-full shadow-md"> Node.js</div>
-          <div className="p-3 bg-white rounded-full shadow-md"> TypeScript</div>
-          <div className="p-3 bg-white rounded-full shadow-md"> Tailwind CSS</div>
-          <div className="p-3 bg-white rounded-full shadow-md">Docker</div>
+      <div className=''>
+        <h2 className='font-bold text-3xl'>THE CORE TECH STACK: </h2>
+      </div>
+      <div className='flex items-center justify-around text-4xl mt-5'>
+          <span> <FaReact/></span>     
+          <span ><FaNodeJs/></span>     
+          <span><BiLogoTypescript/></span>     
+          <span><BiLogoTailwindCss/></span>     
+          <span><FaDocker/></span>     
         </div>
       </div>
       
