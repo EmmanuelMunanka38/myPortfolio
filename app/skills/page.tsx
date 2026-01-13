@@ -1,6 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-
+import { FaReact } from 'react-icons/fa6';
+import { FaNodeJs } from 'react-icons/fa6';
+import { BiLogoTypescript } from "react-icons/bi";
+import { BiLogoTailwindCss } from "react-icons/bi";
+import { FaDocker } from "react-icons/fa";
+import { DiMongodb } from 'react-icons/di';
+import { FaGitAlt } from "react-icons/fa";
+import { GiJetpack } from "react-icons/gi";
+import { GiSpiderWeb } from "react-icons/gi";
+import { SiAegisauthenticator } from "react-icons/si";
+import { TbUxCircle } from "react-icons/tb";
+import { RiNextjsFill } from "react-icons/ri";
 // NOTE: Since the SkillsPage component is large, we'll assume the internal
 // SkillItem component is either defined here or imported from a helper file.
 
@@ -36,6 +47,9 @@ const SkillsPage = () => {
                     </Link>
                 </header>
 
+                <div>
+
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 items-start">
                     
@@ -45,10 +59,10 @@ const SkillsPage = () => {
                         <div>
                             <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Frontend & UI/UX</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <SkillItem icon="" name="React.js" description="Expert level component-based architecture and custom hooks." />
-                                <SkillItem icon="" name="Next.js" description="Mastery of App Router, Server Components, and Routing strategies." />
-                                <SkillItem icon="" name="Tailwind CSS" description="Highly efficient utility-first styling for complex, responsive designs." />
-                                <SkillItem icon="" name="UI/UX Principles" description="Building interfaces focused on accessibility and intuitive user journeys." />
+                               <SkillItem icon=<FaReact/> name="React.js" description="Expert level component-based architecture and custom hooks." />
+                                <SkillItem icon= <RiNextjsFill /> name="Next.js" description="Mastery of App Router, Server Components, and Routing strategies." />
+                                <SkillItem icon=<BiLogoTailwindCss/> name="Tailwind CSS" description="Highly efficient utility-first styling for complex, responsive designs." />
+                                <SkillItem icon= <TbUxCircle /> name="UI/UX Principles" description="Building interfaces focused on accessibility and intuitive user journeys." />
                             </div>
                         </div>
 
@@ -56,10 +70,10 @@ const SkillsPage = () => {
                         <div>
                             <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Backend & APIs</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <SkillItem icon="" name="Node.js & Express" description="Designing and implementing secure, high-throughput RESTful APIs." />
-                                <SkillItem icon="" name="TypeScript" description="End-to-end type safety from database models to the frontend." />
-                                <SkillItem icon="" name="Authentication" description="JWT implementation, OAuth 2.0 flows, and session management." />
-                                <SkillItem icon="" name="WebSockets" description="Real-time communication for dynamic, interactive applications." />
+                                <SkillItem icon=<FaNodeJs/> name="Node.js & Express" description="Designing and implementing secure, high-throughput RESTful APIs." />
+                                <SkillItem icon=<BiLogoTypescript/>  name="TypeScript" description="End-to-end type safety from database models to the frontend." />
+                                <SkillItem icon= <SiAegisauthenticator /> name="Authentication" description="JWT implementation, OAuth 2.0 flows, and session management." />
+                                <SkillItem icon=<GiSpiderWeb/> name="WebSockets" description="Real-time communication for dynamic, interactive applications." />
                             </div>
                         </div>
 
@@ -67,10 +81,10 @@ const SkillsPage = () => {
                         <div>
                             <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Data, Testing & DevOps</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <SkillItem icon="" name="MongoDB" description="Advanced indexing, aggregation pipelines, and schema design." />
-                                <SkillItem icon="" name="Docker" description="Containerization for consistent and reliable development and deployment." />
-                                <SkillItem icon="" name="Git/GitHub" description="Complex branching strategies (Gitflow) and code reviews." />
-                                <SkillItem icon="" name="Jest / React Testing" description="Unit, integration, and E2E testing for robust applications." />
+                                <SkillItem icon=<DiMongodb/> name="MongoDB" description="Advanced indexing, aggregation pipelines, and schema design." />
+                                <SkillItem icon=<FaDocker/> name="Docker" description="Containerization for consistent and reliable development and deployment." />
+                                <SkillItem icon=<FaGitAlt/> name="Git/GitHub" description="Complex branching strategies (Gitflow) and code reviews." />
+                                <SkillItem icon=<GiJetpack/> name="Jest / React Testing" description="Unit, integration, and E2E testing for robust applications." />
                             </div>
                         </div>
                         

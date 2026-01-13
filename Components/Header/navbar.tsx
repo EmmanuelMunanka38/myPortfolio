@@ -19,12 +19,15 @@ const Navbar = () => {
     
 
     
-    return ( <>
-            <header className='w-full sticky top-0 z-50 shadow-md backdrop-blur-sm bg-emerald-100/90 border-b border-emerald-200'>
-            <nav className='flex items-center justify-between px-6 py-3 mx-auto'>
+    return (
+        
+        <div>
+
+                <header className='w-full sticky top-0 z-50 shadow-md backdrop-blur-sm bg-emerald-100/90 border-b border-emerald-200'>
+                 <nav className='flex items-center justify-between px-6 py-3 mx-auto'>
                 
 
-                <Link href="/" className='flex items-center space-x-3 transition-opacity duration-300 hover:opacity-80'>
+                 <Link href="/" className='flex items-center space-x-3 transition-opacity duration-300 hover:opacity-80'>
                     <img
                         className='rounded-full border-2 border-green-500 object-cover'  
                         src="https://avatars.githubusercontent.com/u/191920224?v=4" 
@@ -33,7 +36,7 @@ const Navbar = () => {
                         height={50}
                     />
                     <h2 className='font-extrabold text-lg text-gray-800 hidden sm:block'>EMMANUEL MUNANKA</h2>
-                </Link>
+                 </Link>
 
 
                 <div className='flex space-x-3 sm:space-x-4'>
@@ -60,7 +63,7 @@ const Navbar = () => {
                 
             </nav>
         </header>
-        </>
+        </div>
     );
 }
 

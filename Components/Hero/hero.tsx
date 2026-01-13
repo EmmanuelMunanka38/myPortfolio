@@ -5,7 +5,7 @@ import { FaNodeJs } from "react-icons/fa";
 import { BiLogoTypescript } from "react-icons/bi";
 import { BiLogoTailwindCss } from "react-icons/bi";
 import { FaDocker } from "react-icons/fa";
-
+import { DiMongodb } from "react-icons/di";
 
 
 const Hero = () => {
@@ -46,11 +46,12 @@ const Hero = () => {
         <h2 className='font-bold text-3xl'>THE CORE TECH STACK: </h2>
       </div>
       <div className='flex items-center justify-around text-4xl mt-5'>
-          <span> <FaReact/></span>     
-          <span ><FaNodeJs/></span>     
-          <span><BiLogoTypescript/></span>     
-          <span><BiLogoTailwindCss/></span>     
-          <span><FaDocker/></span>     
+          <span className='text-blue-500'> <FaReact/></span>     
+          <span className='text-green-500'><FaNodeJs/></span>     
+          <span className='text-blue-600'><BiLogoTypescript/></span>     
+          <span className='text-blue-600'><BiLogoTailwindCss/></span>     
+          <span className='text-blue-700'><FaDocker/></span>     
+          <span className='text-green-600'><DiMongodb/></span>
         </div>
       </div>
       
