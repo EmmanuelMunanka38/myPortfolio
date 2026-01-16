@@ -60,7 +60,7 @@ const SkillsPage = () => {
                             <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Frontend & UI/UX</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                <SkillItem icon=<FaReact/> name="React.js" description="Expert level component-based architecture and custom hooks." />
-                                <SkillItem icon= <RiNextjsFill /> name="Next.js" description="Mastery of App Router, Server Components, and Routing strategies." />
+                                <SkillItem icon= <RiNextjsFill / >name="Next.js" description="Mastery of App Router, Server Components, and Routing strategies." />
                                 <SkillItem icon=<BiLogoTailwindCss/> name="Tailwind CSS" description="Highly efficient utility-first styling for complex, responsive designs." />
                                 <SkillItem icon= <TbUxCircle /> name="UI/UX Principles" description="Building interfaces focused on accessibility and intuitive user journeys." />
                             </div>

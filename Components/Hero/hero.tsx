@@ -57,9 +57,6 @@ const Hero = () => {
       
 
       <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-8 justify-center md:justify-start">
-        <button className="bg-emerald-600 text-white font-bold py-4 px-8 rounded-lg shadow-xl hover:bg-emerald-700 transition duration-300 transform hover:scale-105">
-          View Featured Projects
-        </button>
         <a href="https://github.com/EmmanuelMunanka38"><button className="border  border-gray-300 text-gray-800 font-bold py-4 px-8 rounded-lg hover:bg-green-200 transition duration-300">
           Connect to my GITHUB
         </button></a>
