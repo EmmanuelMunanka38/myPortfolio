@@ -12,87 +12,71 @@ import { GiSpiderWeb } from "react-icons/gi";
 import { SiAegisauthenticator } from "react-icons/si";
 import { TbUxCircle } from "react-icons/tb";
 import { RiNextjsFill } from "react-icons/ri";
-// NOTE: Since the SkillsPage component is large, we'll assume the internal
-// SkillItem component is either defined here or imported from a helper file.
 
-// Reusable component for displaying an individual skill item
 interface SkillItemProps {
   icon: React.ReactNode;
   name: string;
   description: string;
 }
 
- export const SkillItem: React.FC<SkillItemProps> = ({ icon, name, description }) => (
-    <div className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm hover:shadow-lg transition duration-300 border border-gray-100">
-        <span className="text-2xl text-emerald-600 flex-shrink-0">{icon}</span>
-        <div>
-            <h4 className="font-semibold text-gray-900">{name}</h4>
-            <p className="text-sm text-gray-600">{description}</p>
-        </div>
+const SkillItem: React.FC<SkillItemProps> = ({ icon, name, description }) => (
+  <div className="flex items-start space-x-3 p-4 bg-white rounded-lg shadow-sm hover:shadow-lg transition duration-300 border border-gray-100">
+    <span className="text-2xl text-emerald-600 flex-shrink-0">{icon}</span>
+    <div>
+      <h4 className="font-semibold text-gray-900">{name}</h4>
+      <p className="text-sm text-gray-600">{description}</p>
     </div>
+  </div>
 );
 
-
 const SkillsPage = () => {
-    return (
+  return (
+    <main className="bg-stone-50 min-h-screen py-20 flex flex-col items-center">
+      <div className="w-full max-w-5xl px-6 lg:px-12">
+        <header className="text-center mb-16">
+          <h1 className="text-5xl font-extrabold text-gray-900 mb-2">My Technical Arsenal</h1>
+          <p className="text-xl text-gray-600">The core technologies and strategic mastery that drive Cosmic&apos;s development.</p>
+          <Link href="/" className="text-lg text-emerald-600 hover:underline mt-4 inline-block font-medium">
+            ← Back to Home Page
+          </Link>
+        </header>
 
-        <main className="bg-stone-50 min-h-screen py-20">
-            <div className="container mx-auto px-6 lg:px-12">
-
-                <header className="text-center mb-16">
-                    <h1 className="text-5xl font-extrabold text-gray-900 mb-2">My Technical Arsenal</h1>
-                    <p className="text-xl text-gray-600">The core technologies and strategic mastery that drive Cosmic&apos;s development.</p>
-                    <Link href="/" className="text-lg text-emerald-600 hover:underline mt-4 inline-block font-medium">
-                        ← Back to Home Page
-                    </Link>
-                </header>
-
-                <div>
-
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 items-start">
-                    
-                    <div className="md:col-span-2 space-y-10">
-                        
-
-                        <div>
-                            <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Frontend & UI/UX</h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                               <SkillItem icon=<FaReact/> name="React.js" description="Expert level component-based architecture and custom hooks." />
-                                <SkillItem icon= <RiNextjsFill / >name="Next.js" description="Mastery of App Router, Server Components, and Routing strategies." />
-                                <SkillItem icon=<BiLogoTailwindCss/> name="Tailwind CSS" description="Highly efficient utility-first styling for complex, responsive designs." />
-                                <SkillItem icon= <TbUxCircle /> name="UI/UX Principles" description="Building interfaces focused on accessibility and intuitive user journeys." />
-                            </div>
-                        </div>
-
-
-                        <div>
-                            <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Backend & APIs</h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <SkillItem icon=<FaNodeJs/> name="Node.js & Express" description="Designing and implementing secure, high-throughput RESTful APIs." />
-                                <SkillItem icon=<BiLogoTypescript/>  name="TypeScript" description="End-to-end type safety from database models to the frontend." />
-                                <SkillItem icon= <SiAegisauthenticator /> name="Authentication" description="JWT implementation, OAuth 2.0 flows, and session management." />
-                                <SkillItem icon=<GiSpiderWeb/> name="WebSockets" description="Real-time communication for dynamic, interactive applications." />
-                            </div>
-                        </div>
-
-
-                        <div>
-                            <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Data, Testing & DevOps</h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <SkillItem icon=<DiMongodb/> name="MongoDB" description="Advanced indexing, aggregation pipelines, and schema design." />
-                                <SkillItem icon=<FaDocker/> name="Docker" description="Containerization for consistent and reliable development and deployment." />
-                                <SkillItem icon=<FaGitAlt/> name="Git/GitHub" description="Complex branching strategies (Gitflow) and code reviews." />
-                                <SkillItem icon=<GiJetpack/> name="Jest / React Testing" description="Unit, integration, and E2E testing for robust applications." />
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
+        <div className="w-full max-w-5xl mx-auto">
+          <div className="space-y-10">
+            <div>
+              <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Frontend & UI/UX</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <SkillItem icon={<FaReact />} name="React.js" description="Expert level component-based architecture and custom hooks." />
+                <SkillItem icon={<RiNextjsFill />} name="Next.js" description="Mastery of App Router, Server Components, and Routing strategies." />
+                <SkillItem icon={<BiLogoTailwindCss />} name="Tailwind CSS" description="Highly efficient utility-first styling for complex, responsive designs." />
+                <SkillItem icon={<TbUxCircle />} name="UI/UX Principles" description="Building interfaces focused on accessibility and intuitive user journeys." />
+              </div>
             </div>
-        </main>
-    );
+
+            <div>
+              <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Backend & APIs</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <SkillItem icon={<FaNodeJs />} name="Node.js & Express" description="Designing and implementing secure, high-throughput RESTful APIs." />
+                <SkillItem icon={<BiLogoTypescript />} name="TypeScript" description="End-to-end type safety from database models to the frontend." />
+                <SkillItem icon={<SiAegisauthenticator />} name="Authentication" description="JWT implementation, OAuth 2.0 flows, and session management." />
+                <SkillItem icon={<GiSpiderWeb />} name="WebSockets" description="Real-time communication for dynamic, interactive applications." />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Data, Testing & DevOps</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <SkillItem icon={<DiMongodb />} name="MongoDB" description="Advanced indexing, aggregation pipelines, and schema design." />
+                <SkillItem icon={<FaDocker />} name="Docker" description="Containerization for consistent and reliable development and deployment." />
+                <SkillItem icon={<FaGitAlt />} name="Git/GitHub" description="Complex branching strategies (Gitflow) and code reviews." />
+                <SkillItem icon={<GiJetpack />} name="Jest / React Testing" description="Unit, integration, and E2E testing for robust applications." />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
 }
 
 export default SkillsPage;

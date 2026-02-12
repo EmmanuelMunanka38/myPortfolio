@@ -1,0 +1,147 @@
+{
+  "bio": {
+    "title": "Building the Future of Web Technology",
+    "subtitle": "Full-Stack Architect & Innovation Leader",
+    "description": "As the CEO and Full-Stack Architect at Cosmic, I bridge the gap between visionary leadership and technical excellence. With a passion for creating scalable, user-centric solutions, I transform complex business challenges into elegant digital experiences that drive measurable results.",
+    "image": "https://avatars.githubusercontent.com/u/191920224?v=4"
+  },
+  "story": {
+    "title": "My Journey",
+    "content": "My path to becoming a Full-Stack Architect began with a fascination for how technology can solve real-world problems. Starting as a self-taught developer, I quickly discovered my talent for both strategic thinking and hands-on implementation. This dual perspective became my greatest asset, enabling me to understand both the business 'why' and the technical 'how'.\n\nAt Cosmic, I've assembled and led teams that deliver cutting-edge web solutions, combining modern frameworks with proven architectural patterns. My approach emphasizes not just writing code, but building systems that are maintainable, scalable, and delightful to use.\n\nI believe in continuous learning and staying at the forefront of technology trends. This commitment to growth ensures that every project I touch benefits from the latest advancements in web development while maintaining the stability and reliability that businesses depend on."
+  },
+  "experience": [
+    {
+      "id": "1",
+      "title": "CEO & Full-Stack Architect",
+      "company": "Cosmic",
+      "period": "2023 - Present",
+      "description": "Leading the technical vision and strategy for Cosmic's product development. Overseeing full-stack architecture decisions, managing development teams, and ensuring delivery of high-quality, scalable web solutions. Key achievements include establishing development best practices, implementing modern CI/CD pipelines, and driving adoption of cutting-edge technologies.",
+      "technologies": ["Next.js", "React", "Node.js", "TypeScript", "MongoDB", "Docker", "AWS"],
+      "achievements": [
+        "Scaled development team from 3 to 12 engineers",
+        "Reduced deployment time by 60% through CI/CD optimization",
+        "Increased code quality with comprehensive testing strategies"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Senior Full-Stack Developer",
+      "company": "Tech Innovations Ltd",
+      "period": "2021 - 2023",
+      "description": "Led the development of enterprise-scale web applications using modern JavaScript frameworks. Architected microservices-based solutions and mentored junior developers. Implemented comprehensive testing strategies and optimized application performance.",
+      "technologies": ["React", "Vue.js", "Node.js", "PostgreSQL", "Redis", "Kubernetes"],
+      "achievements": [
+        "Delivered 5 major client projects on time and budget",
+        "Improved application performance by 40%",
+        "Established code review processes that reduced bugs by 35%"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Frontend Developer",
+      "company": "Digital Solutions Agency",
+      "period": "2019 - 2021",
+      "description": "Developed responsive, user-friendly interfaces for various client projects. Worked closely with UX designers to implement pixel-perfect designs. Optimized applications for performance and accessibility.",
+      "technologies": ["JavaScript", "React", "HTML5", "CSS3", "SASS", "Git"],
+      "achievements": [
+        "Improved website accessibility scores to WCAG 2.1 AA standards",
+        "Reduced page load times by 50% through optimization",
+        "Built reusable component libraries that increased development efficiency"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "1",
+      "degree": "Computer Science",
+      "institution": "University of Dar es Salaam",
+      "period": "2015 - 2019",
+      "description": "Bachelor of Science in Computer Science with focus on Software Engineering and Web Technologies. Graduated with Honors, GPA 3.8/4.0.",
+      "achievements": [
+        "Dean's List for academic excellence",
+        "President of the Computer Science Club",
+        "Led team to win national hackathon"
+      ]
+    }
+  ],
+  "skills": {
+    "technical": [
+      {
+        "category": "Frontend",
+        "items": [
+          { "name": "React.js", "level": 95 },
+          { "name": "Next.js", "level": 90 },
+          { "name": "TypeScript", "level": 85 },
+          { "name": "Tailwind CSS", "level": 88 },
+          { "name": "HTML5/CSS3", "level": 95 }
+        ]
+      },
+      {
+        "category": "Backend",
+        "items": [
+          { "name": "Node.js", "level": 90 },
+          { "name": "Express.js", "level": 88 },
+          { "name": "MongoDB", "level": 85 },
+          { "name": "PostgreSQL", "level": 80 },
+          { "name": "REST APIs", "level": 92 }
+        ]
+      },
+      {
+        "category": "DevOps & Tools",
+        "items": [
+          { "name": "Git/GitHub", "level": 90 },
+          { "name": "Docker", "level": 85 },
+          { "name": "CI/CD", "level": 80 },
+          { "name": "AWS", "level": 75 },
+          { "name": "Testing", "level": 85 }
+        ]
+      }
+    ],
+    "leadership": [
+      "Team Leadership & Management",
+      "Project Architecture & Planning",
+      "Agile/Scrum Methodologies",
+      "Client Relationship Management",
+      "Technical Writing & Documentation",
+      "Mentoring & Knowledge Sharing"
+    ]
+  },
+  "achievements": [
+    {
+      "title": "Innovation Excellence Award",
+      "description": "Recognized for outstanding innovation in web application architecture and delivery of cutting-edge solutions.",
+      "year": "2023",
+      "type": "professional"
+    },
+    {
+      "title": "National Hackathon Winner",
+      "description": "Led team to victory in the Tanzania National Hackathon with a innovative fintech solution.",
+      "year": "2018",
+      "type": "academic"
+    },
+    {
+      "title": "Open Source Contributor",
+      "description": "Active contributor to major open source projects including React ecosystem and Node.js libraries.",
+      "year": "2022",
+      "type": "community"
+    }
+  ],
+  "values": [
+    {
+      "title": "Innovation",
+      "description": "Constantly exploring new technologies and approaches to push the boundaries of what's possible in web development."
+    },
+    {
+      "title": "Quality",
+      "description": "Committed to delivering excellence in every line of code, with rigorous testing and attention to detail."
+    },
+    {
+      "title": "Collaboration",
+      "description": "Believe in the power of teamwork and fostering an environment where great ideas can flourish."
+    },
+    {
+      "title": "Continuous Learning",
+      "description": "Dedicated to staying current with industry trends and expanding technical knowledge daily."
+    }
+  ]
+}

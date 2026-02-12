@@ -1,0 +1,76 @@
+[
+  {
+    "id": "1",
+    "title": "Building Scalable React Applications",
+    "slug": "building-scalable-react-applications",
+    "excerpt": "Learn the best practices and patterns for building maintainable and scalable React applications that can grow with your business needs.",
+    "content": "# Building Scalable React Applications\n\nIn today's fast-paced development environment, building applications that can scale is crucial for long-term success. This article explores the key principles and patterns for creating scalable React applications.\n\n## Understanding Scalability\n\nScalability in React applications encompasses several aspects:\n- **Performance**: Maintaining fast load times and smooth interactions\n- **Maintainability**: Writing code that's easy to understand and modify\n- **Extensibility**: Allowing for easy addition of new features\n- **Team collaboration**: Supporting multiple developers working simultaneously\n\n## Key Principles\n\n### 1. Component Architecture\nDesign your components with single responsibility in mind:\n\n```javascript\n// Good: Single responsibility component\nconst UserAvatar = ({ user, size }) => {\n  return (\n    <img \n      src={user.avatar} \n      alt={user.name}\n      className={`avatar-${size}`}\n    />\n  );\n};\n\n// Avoid: Multiple responsibilities\nconst UserProfile = ({ user }) => {\n  return (\n    <div>\n      <img src={user.avatar} alt={user.name} />\n      <h1>{user.name}</h1>\n      <p>{user.bio}</p>\n      <button onClick={() => editUser(user.id)}>Edit</button>\n    </div>\n  );\n};\n```\n\n### 2. State Management\nChoose the right state management solution based on your application's complexity:\n\n- **Local state**: useState, useReducer for component-specific state\n- **Global state**: Context API, Zustand, or Redux for application-wide state\n- **Server state**: React Query, SWR for caching and synchronizing server data\n\n### 3. Performance Optimization\n\nImplement lazy loading for code splitting:\n\n```javascript\nimport { lazy, Suspense } from 'react';\n\nconst HeavyComponent = lazy(() => import('./HeavyComponent'));\n\nfunction App() {\n  return (\n    <div>\n      <Suspense fallback={<Loading />}> \n        <HeavyComponent />\n      </Suspense>\n    </div>\n  );\n}\n```\n\n### 4. Testing Strategy\n\nImplement a comprehensive testing approach:\n- **Unit tests**: Test individual components and functions\n- **Integration tests**: Test component interactions\n- **E2E tests**: Test user workflows\n\n## Conclusion\n\nBuilding scalable React applications requires thoughtful planning and adherence to best practices. By focusing on clean architecture, efficient state management, performance optimization, and comprehensive testing, you can create applications that stand the test of time and scale with your business needs.\n\nRemember that scalability is not just about handling more users—it's about creating a maintainable codebase that can evolve with changing requirements.",
+    "author": "Emmanuel Munanka",
+    "publishedAt": "2024-02-15",
+    "readingTime": 8,
+    "tags": [
+      "React",
+      "JavaScript",
+      "Architecture",
+      "Performance"
+    ],
+    "featured": true,
+    "coverImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop"
+  },
+  {
+    "id": "2",
+    "title": "TypeScript Best Practices in 2024",
+    "slug": "typescript-best-practices-2024",
+    "excerpt": "Discover the latest TypeScript patterns and best practices for writing type-safe, maintainable code in modern web development.",
+    "content": "# TypeScript Best Practices in 2024\n\nTypeScript has become the de facto language for type-safe JavaScript development. This guide covers the best practices and patterns you should follow in 2024.\n\n## Type Definitions\n\n### Use Interfaces for Object Shapes\n\n```typescript\n// Good: Use interfaces for public APIs\ninterface User {\n  id: string;\n  name: string;\n  email: string;\n  avatar?: string;\n}\n\n// Good: Use types for unions or computed types\ntype Status = 'active' | 'inactive' | 'pending';\ntype UserWithStatus = User & { status: Status };\n```\n\n### Utility Types\n\nLeverage TypeScript's built-in utility types:\n\n```typescript\ninterface APIResponse {\n  data: User[];\n  pagination: {\n    page: number;\n    totalPages: number;\n  };\n}\n\n// Create partial version for updates\ntype UpdateUserRequest = Partial<APIResponse['data'][0]>;\n\n// Pick specific fields\ntype UserSummary = Pick<User, 'id' | 'name' | 'email'>;\n```\n\n## Advanced Patterns\n\n### Generic Components\n\n```typescript\ninterface ListProps<T> {\n  items: T[];\n  renderItem: (item: T) => React.ReactNode;\n  keyExtractor: (item: T) => string;\n}\n\nfunction List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {\n  return (\n    <div>\n      {items.map((item) => (\n        <div key={keyExtractor(item)}>\n          {renderItem(item)}\n        </div>\n      ))}\n    </div>\n  );\n}\n```\n\n### Discriminated Unions\n\n```typescript\ntype LoadingState = {\n  status: 'loading';\n};\n\ntype SuccessState<T> = {\n  status: 'success';\n  data: T;\n};\n\ntype ErrorState = {\n  status: 'error';\n  error: string;\n};\n\ntype AsyncState<T> = LoadingState | SuccessState<T> | ErrorState;\n\nfunction renderState<T>(state: AsyncState<T>) {\n  switch (state.status) {\n    case 'loading':\n      return <Loading />;\n    case 'success':\n      return <DataView data={state.data} />;\n    case 'error':\n      return <ErrorDisplay error={state.error} />;\n  }\n}\n```\n\n## Configuration\n\n### Strict TypeScript Config\n\n```json\n{\n  \"compilerOptions\": {\n    \"strict\": true,\n    \"noImplicitAny\": true,\n    \"noImplicitReturns\": true,\n    \"noUnusedLocals\": true,\n    \"noUnusedParameters\": true\n  }\n}\n```\n\n## Conclusion\n\nTypeScript provides powerful tools for building type-safe applications. By following these best practices, you can create more maintainable and robust codebases that catch errors at compile time rather than runtime.",
+    "author": "Emmanuel Munanka",
+    "publishedAt": "2024-02-10",
+    "readingTime": 6,
+    "tags": [
+      "TypeScript",
+      "JavaScript",
+      "Type Safety",
+      "Best Practices"
+    ],
+    "featured": false,
+    "coverImage": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=400&fit=crop"
+  },
+  {
+    "id": "3",
+    "title": "Modern CSS Techniques for Web Developers",
+    "slug": "modern-css-techniques-web-developers",
+    "excerpt": "Explore cutting-edge CSS features and techniques that will elevate your web development skills and create stunning user interfaces.",
+    "content": "# Modern CSS Techniques for Web Developers\n\nCSS has evolved significantly over the past few years. Let's explore modern techniques that will transform how you style web applications.\n\n## CSS Grid and Flexbox Mastery\n\n### Advanced Grid Layouts\n\n```css\n.container {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n  gap: 2rem;\n  padding: 2rem;\n}\n\n.card {\n  display: grid;\n  grid-template-rows: auto 1fr auto;\n  height: 100%;\n}\n```\n\n### Flexbox Best Practices\n\n```css\n.flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.flex-between {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n```\n\n## CSS Custom Properties\n\n### Dynamic Theming\n\n```css\n:root {\n  --primary-color: #3b82f6;\n  --secondary-color: #64748b;\n  --background: #ffffff;\n  --text-primary: #1e293b;\n  --text-secondary: #64748b;\n}\n\n[data-theme=\"dark\"] {\n  --primary-color: #60a5fa;\n  --secondary-color: #94a3b8;\n  --background: #1e293b;\n  --text-primary: #f1f5f9;\n  --text-secondary: #cbd5e1;\n}\n\n.button {\n  background-color: var(--primary-color);\n  color: var(--background);\n  padding: 0.75rem 1.5rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n\n.button:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);\n}\n```\n\n## Modern Animations\n\n### Smooth Transitions\n\n```css\n.card {\n  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),\n              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n}\n\n.card:hover {\n  transform: translateY(-4px);\n  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);\n}\n```\n\n### Keyframe Animations\n\n```css\n@keyframes slideInFromLeft {\n  from {\n    transform: translateX(-100%);\n    opacity: 0;\n  }\n  to {\n    transform: translateX(0);\n    opacity: 1;\n  }\n}\n\n.slide-in {\n  animation: slideInFromLeft 0.5s ease-out;\n}\n```\n\n## Container Queries\n\n```css\n.component {\n  container-type: inline-size;\n}\n\n@container (min-width: 400px) {\n  .component {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    gap: 1rem;\n  }\n}\n\n@container (min-width: 700px) {\n  .component {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}\n```\n\n## Modern Layout Techniques\n\n### CSS Subgrid\n\n```css\n.grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 2rem;\n}\n\n.grid-item {\n  grid-column: span 2;\n  display: grid;\n  grid-template-rows: auto 1fr;\n  gap: 1rem;\n}\n\n.grid-item-content {\n  display: grid;\n  grid-template-columns: subgrid;\n  grid-column: 1 / -1;\n}\n```\n\n## Conclusion\n\nModern CSS provides powerful tools for creating responsive, maintainable, and beautiful user interfaces. By leveraging these techniques, you can write less code while achieving better results.",
+    "author": "Emmanuel Munanka",
+    "publishedAt": "2024-02-05",
+    "readingTime": 7,
+    "tags": [
+      "CSS",
+      "Web Development",
+      "Design",
+      "Frontend"
+    ],
+    "featured": true,
+    "coverImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop"
+  },
+  {
+    "title": "Fixing retail with land value capture",
+    "slug": "fixing-retail-with-land-value-capture",
+    "excerpt": "Score: 16 | 8 comments",
+    "content": "Source: Hacker News\nURL: https://worksinprogress.co/issue/fixing-retail-with-land-value-capture/\nAuthor: marojejian\nScore: 16",
+    "author": "marojejian",
+    "publishedAt": "2026-02-12T20:44:17.000Z",
+    "readingTime": 2,
+    "tags": [
+      "Hacker News",
+      "story"
+    ],
+    "featured": false,
+    "coverImage": "https://picsum.photos/seed/hn_46994869/800/400",
+    "url": "https://worksinprogress.co/issue/fixing-retail-with-land-value-capture/",
+    "hnId": 46994869,
+    "score": 16,
+    "comments": 8,
+    "id": "blog_1770933046259_9hek6pyxy"
+  }
+]

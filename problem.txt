@@ -1,0 +1,19 @@
+Responsive desing:{
+    mobile view 
+    proper components adjustment 
+}
+
+Admin panel:{
+    proper admin panel functionality
+    Data analysis by the admin panel 
+    visitor registration => tells the people that have visited my site 
+}
+
+blog panel : {
+    proper routing 
+    blog posting by the admin => fetching api from Hacker nes
+}
+
+skill:{
+    page centering the content of the div and its contents 
+}

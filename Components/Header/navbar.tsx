@@ -1,69 +1,79 @@
-'use client';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation'; 
-import Link from 'next/link'; 
-
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] = useState(false)
 
-    const router = useRouter()
+    const navLinks = [
+        { href: '/about', label: 'About' },
+        { href: '/projects', label: 'Projects' },
+        { href: '/skills', label: 'Skills' },
+    ]
 
-
-    const ToContacts = () => {
-        router.push('/contacts')
-    }
-
-    const ToSkills = () => {
-        router.push('/skills')
-    }
-    
-
-    
     return (
-        
-        <div>
-
-                <header className='w-full sticky top-0 z-50 shadow-md backdrop-blur-sm bg-emerald-100/90 border-b border-emerald-200'>
-                 <nav className='flex items-center justify-between px-6 py-3 mx-auto'>
-                
-
-                 <Link href="/" className='flex items-center space-x-3 transition-opacity duration-300 hover:opacity-80'>
+        <header className='w-full sticky top-0 z-50 shadow-md backdrop-blur-sm bg-emerald-100/90 border-b border-emerald-200'>
+            <nav className='flex items-center justify-between px-4 sm:px-6 py-3 mx-auto max-w-7xl'>
+                <Link href="/" className='flex items-center space-x-3 transition-opacity duration-300 hover:opacity-80'>
                     <img
                         className='rounded-full border-2 border-green-500 object-cover'  
                         src="https://avatars.githubusercontent.com/u/191920224?v=4" 
                         alt="My Github Avatar" 
-                        width={50}
-                        height={50}
+                        width={40}
+                        height={40}
                     />
                     <h2 className='font-extrabold text-lg text-gray-800 hidden sm:block'>EMMANUEL MUNANKA</h2>
-                 </Link>
+                </Link>
 
+                <button 
+                    className='sm:hidden p-2 text-gray-700'
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Toggle menu"
+                >
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
 
-                <div className='flex space-x-3 sm:space-x-4'>
-                    
+                <div className={`sm:hidden ${isOpen ? 'flex' : 'hidden'} absolute top-full left-0 right-0 bg-emerald-100/95 backdrop-blur-sm p-4 flex-col space-y-3 shadow-lg`}>
+                    {navLinks.map((link) => (
+                        <Link 
+                            key={link.href}
+                            href={link.href}
+                            className='text-gray-700 hover:text-emerald-600 font-medium transition-colors block'
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                    <Link 
+                        href="/contacts"
+                        className='bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-emerald-700 transition duration-300 transform hover:scale-105 text-center'
+                        onClick={() => setIsOpen(false)}
+                    >
+                        Contacts
+                    </Link>
+                </div>
 
-                    <button  
-                        onClick={ToContacts}  
+                <div className='hidden sm:flex items-center space-x-4'>
+                    {navLinks.map((link) => (
+                        <Link 
+                            key={link.href}
+                            href={link.href}
+                            className='text-gray-700 hover:text-emerald-600 font-medium transition-colors'
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                    <Link 
+                        href="/contacts"
                         className='bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-emerald-700 transition duration-300 transform hover:scale-105'
                     >
                         Contacts
-                    </button>
-
-
-                    <button 
-                        onClick={ToSkills} 
-                        className='border border-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105'
-                    >
-                        Skills
-                    </button>
-                    
-
-
+                    </Link>
                 </div>
-                
             </nav>
         </header>
-        </div>
     );
 }
 
