@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  Save, Plus, Trash2, Edit, Eye, FileText, Package, User, Settings,
+  Save, Plus, Trash2, Edit, Eye, Package, User, Settings,
   BarChart3, Github, RefreshCw, X, Check, AlertCircle, ExternalLink,
   TrendingUp, Users, Eye as ViewIcon, Clock
 } from 'lucide-react'
@@ -21,24 +21,6 @@ interface Project {
   category: string
   completionDate: string
   client: string
-}
-
-interface BlogPost {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  content: string
-  author: string
-  publishedAt: string
-  readingTime: number
-  tags: string[]
-  featured: boolean
-  coverImage: string
-  url?: string
-  hnId?: number
-  score?: number
-  comments?: number
 }
 
 interface GitHubRepo {
@@ -66,11 +48,9 @@ interface AnalyticsData {
 }
 
 const AdminDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'projects' | 'blog' | 'analytics'>('projects')
+  const [activeTab, setActiveTab] = useState<'projects' | 'analytics'>('projects')
   const [projects, setProjects] = useState<Project[]>([])
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
   const [editingProject, setEditingProject] = useState<Project | null>(null)
-  const [editingBlog, setEditingBlog] = useState<BlogPost | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   
@@ -78,9 +58,6 @@ const AdminDashboard: React.FC = () => {
   const [githubRepos, setGithubRepos] = useState<GitHubRepo[]>([])
   const [selectedRepos, setSelectedRepos] = useState<Set<string>>(new Set())
   const [isLoadingGithub, setIsLoadingGithub] = useState(false)
-  
-  const [hackerNewsPosts, setHackerNewsPosts] = useState<BlogPost[]>([])
-  const [isLoadingHN, setIsLoadingHN] = useState(false)
   
   const [analytics, setAnalytics] = useState<AnalyticsData>({
     totalVisitors: 0,
@@ -102,16 +79,10 @@ const AdminDashboard: React.FC = () => {
   const loadData = async () => {
     setIsLoading(true)
     try {
-      const [projectsRes, blogRes] = await Promise.all([
-        fetch('/api/admin/projects'),
-        fetch('/api/admin/blog')
-      ])
-      
+      const projectsRes = await fetch('/api/admin/projects')
       const projectsData = await projectsRes.json()
-      const blogData = await blogRes.json()
       
       if (Array.isArray(projectsData)) setProjects(projectsData)
-      if (Array.isArray(blogData)) setBlogPosts(blogData)
     } catch (error) {
       console.error('Error loading data:', error)
     } finally {
@@ -195,51 +166,6 @@ const AdminDashboard: React.FC = () => {
     }
   }
 
-  const fetchHackerNews = async () => {
-    setIsLoadingHN(true)
-    try {
-      const response = await fetch('/api/admin/hacker-news?limit=30')
-      const data = await response.json()
-      
-      if (response.ok) {
-        setHackerNewsPosts(data)
-        showMessage('success', `Fetched ${data.length} Hacker News stories`)
-      } else {
-        showMessage('error', data.error || 'Failed to fetch Hacker News')
-      }
-    } catch (error) {
-      showMessage('error', 'Failed to fetch Hacker News stories')
-    } finally {
-      setIsLoadingHN(false)
-    }
-  }
-
-  const importHackerNewsPost = async (post: BlogPost) => {
-    setIsLoading(true)
-    try {
-      const response = await fetch('/api/admin/blog', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...post,
-          id: undefined,
-          coverImage: `https://picsum.photos/seed/${post.id}/800/400`
-        })
-      })
-      
-      if (response.ok) {
-        showMessage('success', 'Hacker News post imported successfully')
-        loadData()
-      } else {
-        showMessage('error', 'Failed to import post')
-      }
-    } catch (error) {
-      showMessage('error', 'Failed to import post')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
   const saveProject = async (project: Partial<Project>) => {
     setIsLoading(true)
     try {
@@ -285,56 +211,6 @@ const AdminDashboard: React.FC = () => {
       }
     } catch (error) {
       showMessage('error', 'Failed to delete project')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const saveBlogPost = async (post: Partial<BlogPost>) => {
-    setIsLoading(true)
-    try {
-      const method = post.id && !String(post.id).startsWith('new_') ? 'POST' : 'POST'
-      const body = post.id && !String(post.id).startsWith('new_') 
-        ? { ...post, id: post.id }
-        : post
-      
-      const response = await fetch('/api/admin/blog', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      })
-      
-      if (response.ok) {
-        showMessage('success', 'Blog post saved successfully')
-        setEditingBlog(null)
-        loadData()
-      } else {
-        showMessage('error', 'Failed to save blog post')
-      }
-    } catch (error) {
-      showMessage('error', 'Failed to save blog post')
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const deleteBlogPost = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this blog post?')) return
-    
-    setIsLoading(true)
-    try {
-      const response = await fetch(`/api/admin/blog?id=${encodeURIComponent(id)}`, {
-        method: 'DELETE'
-      })
-      
-      if (response.ok) {
-        showMessage('success', 'Blog post deleted successfully')
-        loadData()
-      } else {
-        showMessage('error', 'Failed to delete blog post')
-      }
-    } catch (error) {
-      showMessage('error', 'Failed to delete blog post')
     } finally {
       setIsLoading(false)
     }
@@ -529,162 +405,6 @@ const AdminDashboard: React.FC = () => {
     )
   }
 
-  const BlogForm: React.FC<{ post?: BlogPost; onClose: () => void }> = ({ post, onClose }) => {
-    const [formData, setFormData] = useState<Partial<BlogPost>>(
-      post || {
-        id: `new_${Date.now()}`,
-        title: '',
-        slug: '',
-        excerpt: '',
-        content: '',
-        author: 'Emmanuel Munanka',
-        publishedAt: new Date().toISOString().split('T')[0],
-        readingTime: 5,
-        tags: [],
-        featured: false,
-        coverImage: ''
-      }
-    )
-
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault()
-      const slug = formData.slug || formData.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-      saveBlogPost({ ...formData, slug })
-      onClose()
-    }
-
-    return (
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-            <input
-              type="text"
-              value={formData.title || ''}
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-            <input
-              type="text"
-              value={formData.slug || ''}
-              onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-              placeholder="my-blog-post"
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Excerpt</label>
-          <textarea
-            value={formData.excerpt || ''}
-            onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            rows={2}
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
-          <textarea
-            value={formData.content || ''}
-            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            rows={6}
-            required
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Author</label>
-            <input
-              type="text"
-              value={formData.author || ''}
-              onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Published Date</label>
-            <input
-              type="date"
-              value={formData.publishedAt?.split('T')[0] || ''}
-              onChange={(e) => setFormData({ ...formData, publishedAt: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Reading Time (min)</label>
-            <input
-              type="number"
-              value={formData.readingTime || 5}
-              onChange={(e) => setFormData({ ...formData, readingTime: parseInt(e.target.value) })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-              min={1}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image URL</label>
-          <input
-            type="url"
-            value={formData.coverImage || ''}
-            onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            required
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma-separated)</label>
-          <input
-            type="text"
-            value={(formData.tags || []).join(', ')}
-            onChange={(e) => setFormData({ ...formData, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            placeholder="React, TypeScript, Tutorial"
-          />
-        </div>
-
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            checked={formData.featured || false}
-            onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-            className="mr-2"
-            id="blog-featured"
-          />
-          <label htmlFor="blog-featured" className="text-sm font-medium text-gray-700">Featured Post</label>
-        </div>
-
-        <div className="flex justify-end space-x-3 pt-4">
-          <button
-            type="button"
-            onClick={onClose}
-            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50"
-          >
-            {isLoading ? 'Saving...' : 'Save Post'}
-          </button>
-        </div>
-      </form>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       <AnimatePresence>
@@ -724,18 +444,6 @@ const AdminDashboard: React.FC = () => {
               >
                 <Package className="w-5 h-5" />
                 <span>Projects</span>
-              </button>
-              
-              <button
-                onClick={() => setActiveTab('blog')}
-                className={`flex items-center space-x-2 py-4 px-1 border-b-2 font-medium text-sm whitespace-nowrap ${
-                  activeTab === 'blog'
-                    ? 'border-emerald-500 text-emerald-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
-              >
-                <FileText className="w-5 h-5" />
-                <span>Blog</span>
               </button>
               
               <button
@@ -904,123 +612,6 @@ const AdminDashboard: React.FC = () => {
                   </div>
                 )}
               </div>
-            </div>
-          )}
-
-          {activeTab === 'blog' && (
-            <div>
-              <div className="mb-6 flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setEditingBlog({} as BlogPost)}
-                  className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 flex items-center justify-center"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add New Post
-                </button>
-                <button
-                  onClick={fetchHackerNews}
-                  disabled={isLoadingHN}
-                  className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 flex items-center justify-center"
-                >
-                  <RefreshCw className={`w-4 h-4 mr-2 ${isLoadingHN ? 'animate-spin' : ''}`} />
-                  Fetch Hacker News
-                </button>
-              </div>
-
-              {editingBlog !== null && (
-                <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold">
-                      {editingBlog.id && !String(editingBlog.id).startsWith('new_') ? 'Edit Blog Post' : 'Add New Blog Post'}
-                    </h3>
-                    <button onClick={() => setEditingBlog(null)} className="text-gray-500 hover:text-gray-700">
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-                  <BlogForm post={editingBlog.id ? editingBlog : undefined} onClose={() => setEditingBlog(null)} />
-                </div>
-              )}
-
-              {hackerNewsPosts.length > 0 && (
-                <div className="mb-8 p-4 bg-orange-50 rounded-lg">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-orange-900">Hacker News Stories</h3>
-                    <button onClick={() => setHackerNewsPosts([])} className="text-orange-700 hover:text-orange-900">
-                      <X className="w-5 h-5" />
-                    </button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-64 overflow-y-auto">
-                    {hackerNewsPosts.map((post) => (
-                      <div key={post.id} className="p-3 border border-orange-200 rounded-lg bg-white">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1 min-w-0">
-                            <h4 className="font-medium text-gray-900 text-sm line-clamp-2">{post.title}</h4>
-                            <p className="text-xs text-gray-500 mt-1">
-                              Score: {post.score} | Comments: {post.comments}
-                            </p>
-                          </div>
-                          <button
-                            onClick={() => importHackerNewsPost(post)}
-                            disabled={isLoading}
-                            className="ml-2 px-2 py-1 bg-orange-600 text-white text-xs rounded hover:bg-orange-700 disabled:opacity-50"
-                          >
-                            Import
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {blogPosts.map((post) => (
-                  <div key={post.id} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-semibold text-gray-900 truncate flex-1">{post.title}</h3>
-                      {post.featured && (
-                        <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded ml-2">Featured</span>
-                      )}
-                    </div>
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{post.excerpt}</p>
-                    <div className="flex flex-wrap gap-1 mb-3">
-                      {post.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">{tag}</span>
-                      ))}
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => setEditingBlog(post)}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded"
-                        >
-                          <Edit className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => deleteBlogPost(post.id)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                        {post.url && (
-                          <a href={post.url} target="_blank" rel="noopener noreferrer" className="p-2 text-gray-600 hover:bg-gray-50 rounded">
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-                      <span className="text-xs text-gray-500">
-                        {new Date(post.publishedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {blogPosts.length === 0 && !editingBlog && (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 mb-4">No blog posts yet. Add one or import from Hacker News.</p>
-                </div>
-              )}
             </div>
           )}
 

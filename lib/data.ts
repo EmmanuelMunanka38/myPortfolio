@@ -16,20 +16,6 @@ export interface Project {
   client: string
 }
 
-export interface BlogPost {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  content: string
-  author: string
-  publishedAt: string
-  readingTime: number
-  tags: string[]
-  featured: boolean
-  coverImage: string
-}
-
 export interface Experience {
   id: string
   title: string
@@ -100,27 +86,6 @@ export async function getFeaturedProjects(): Promise<Project[]> {
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
   const projects = await getProjects()
   return projects.find(project => project.id === slug) || null
-}
-
-export async function getBlogPosts(): Promise<BlogPost[]> {
-  try {
-    const fullPath = path.join(dataDirectory, 'blog.json')
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    return JSON.parse(fileContents) as BlogPost[]
-  } catch (error) {
-    console.error('Error reading blog posts:', error)
-    return []
-  }
-}
-
-export async function getFeaturedBlogPosts(): Promise<BlogPost[]> {
-  const posts = await getBlogPosts()
-  return posts.filter(post => post.featured)
-}
-
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  const posts = await getBlogPosts()
-  return posts.find(post => post.slug === slug) || null
 }
 
 export async function getAboutData(): Promise<AboutData | null> {
